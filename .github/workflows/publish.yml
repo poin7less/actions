@@ -4,7 +4,7 @@ on:
   workflow_call:
 
 jobs:
-  publish-aar:
+  publish:
     runs-on: self-hosted
     steps:
       - uses: poin7less/actions/.github/actions/android@master
