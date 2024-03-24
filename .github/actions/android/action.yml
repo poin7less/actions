@@ -3,11 +3,6 @@ description: Prepares Android runtime (ie. installs java and sets everything up)
 runs:
   using: composite
   steps:
-    - shell: bash
-      run: |
-        sudo apt update -y
-        sudo apt install -y unzip git
-
     - uses: actions/checkout@v4
     - shell: bash
       run: |
