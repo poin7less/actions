@@ -1,0 +1,20 @@
+name: Publish
+
+on:
+  workflow_call:
+
+jobs:
+  publish-aar:
+    runs-on: self-hosted
+    steps:
+      - uses: poin7less/actions/.github/actions/android@master
+        with:
+          token: ${{ github.token }}
+          user: ${{ github.actor }}
+          refName: ${{ github.ref_name }}
+          refType: ${{ github.ref_type }}
+
+      - name: Build with Gradle
+        uses: gradle/gradle-build-action@v3
+        with:
+          arguments: publishAllPublicationsToGithubRepository --continue

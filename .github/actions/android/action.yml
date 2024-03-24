@@ -1,0 +1,27 @@
+name: Prepare for Android
+description: Prepares Android runtime (ie. installs java and sets everything up)
+runs:
+  using: composite
+  steps:
+    - uses: actions/checkout@v4
+    - shell: bash
+      run: |
+        refName=${{ github.ref_name }}
+        refType=${{ github.ref_type }}
+        if [ $refType = "branch" ]; then
+          refName="$refName-SNAPSHOT"
+        fi
+        echo "VERSION_NAME=$refName" >> gradle.properties
+
+    - shell: bash
+      run: |
+        echo "GithubPassword=${{ github.token }}" >> gradle.properties
+        echo "GithubUsername=${{ github.actor }}" >> gradle.properties
+
+    - uses: actions/setup-java@v4
+      with:
+        java-version: 17
+        distribution: temurin
+        cache: gradle
+
+    - uses: android-actions/setup-android@v3
