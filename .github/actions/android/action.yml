@@ -6,7 +6,8 @@ runs:
     - uses: actions/checkout@v4
     - shell: bash
       run: |
-        sudo apt install unzip
+        sudo apt update -y
+        sudo apt install -y unzip
     - shell: bash
       run: |
         refName=${{ github.ref_name }}
