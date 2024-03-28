@@ -5,7 +5,7 @@ on:
 
 jobs:
   publish:
-    runs-on: self-hosted
+    runs-on: rapidash
     steps:
       - uses: poin7less/actions/.github/actions/android@master
         with:
