@@ -6,10 +6,12 @@ runs:
     - uses: actions/checkout@v4
     - shell: bash
       run: |
+        set -e
         sudo apt update -y
         sudo apt install -y python3-venv python3.10-venv git unzip
     - shell: bash
       run: |
+        set -e
         refName=${{ github.ref_name }}
         refType=${{ github.ref_type }}
         if [ $refType = "branch" ]; then
@@ -19,6 +21,7 @@ runs:
 
     - shell: bash
       run: |
+        set -e
         echo "GithubPassword=${{ github.token }}" >> gradle.properties
         echo "GithubUsername=${{ github.actor }}" >> gradle.properties
 

@@ -16,6 +16,7 @@ jobs:
       contents: write
     if: github.actor == 'dependabot[bot]'
     steps:
+      - uses: poin7less/actions/.github/actions/github-cli@master
       - name: Merge
         run: gh pr merge --rebase "$PR_URL"
         env:
