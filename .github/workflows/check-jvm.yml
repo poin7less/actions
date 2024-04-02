@@ -1,0 +1,68 @@
+name: Checks
+
+on:
+  workflow_call:
+    inputs:
+      ensure_binary_compatibility:
+        type: boolean
+        required: false
+        default: true
+    secrets:
+      AUTH_TOKEN:
+        required: true
+
+jobs:
+  test:
+    runs-on: rapidash
+    permissions:
+      contents: read
+      issues: read
+      checks: write
+      pull-requests: write
+    steps:
+      - uses: poin7less/actions/.github/actions/jvm@master
+
+      - uses: gradle/gradle-build-action@v3
+        with:
+          arguments: test
+
+      - uses: EnricoMi/publish-unit-test-result-action/linux@v2
+        if: always()
+        with:
+          junit_files: "**/test-results/**/*.xml"
+
+  compatibility:
+    runs-on: rapidash
+    if: ${{ inputs.ensure_binary_compatibility }}
+    permissions:
+      contents: read
+    steps:
+      - uses: poin7less/actions/.github/actions/jvm@master
+
+      - uses: gradle/gradle-build-action@v3
+        with:
+          arguments: apiCheck
+
+  lint:
+    runs-on: rapidash
+    permissions:
+      contents: read
+      issues: read
+      checks: write
+      pull-requests: write
+    steps:
+      - uses: poin7less/actions/.github/actions/jvm@master
+
+      - uses: gradle/gradle-build-action@v3
+        with:
+          arguments: detekt
+
+      - uses: jwgmeligmeyling/checkstyle-github-action@v1
+        if: always()
+        with:
+          path: '**/merge.xml'
+
+  merge:
+    needs: [ test, compatibility, lint ]
+    uses: poin7less/actions/.github/workflows/automerge.yml@master
+    secrets: inherit

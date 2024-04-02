@@ -1,5 +1,5 @@
-name: Prepare for Android
-description: Prepares Android runtime (ie. installs java and sets everything up)
+name: Prepare for JVM
+description: Prepares JDK runtime (ie. installs java and sets everything up)
 runs:
   using: composite
   steps:
@@ -10,5 +10,3 @@ runs:
         java-version: 17
         distribution: temurin
         cache: gradle
-
-    - uses: android-actions/setup-android@v3

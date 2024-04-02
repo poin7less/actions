@@ -6,6 +6,9 @@ on:
 jobs:
   publish:
     runs-on: rapidash
+    permissions:
+      packages: write
+      contents: write
     steps:
       - uses: poin7less/actions/.github/actions/android@master
         with:

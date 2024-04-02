@@ -1,0 +1,23 @@
+name: Publish
+
+on:
+  workflow_call:
+
+jobs:
+  publish:
+    runs-on: rapidash
+    permissions:
+      packages: write
+      contents: write
+    steps:
+      - uses: poin7less/actions/.github/actions/jvm@master
+        with:
+          token: ${{ github.token }}
+          user: ${{ github.actor }}
+          refName: ${{ github.ref_name }}
+          refType: ${{ github.ref_type }}
+
+      - name: Build with Gradle
+        uses: gradle/gradle-build-action@v3
+        with:
+          arguments: publishAllPublicationsToGithubRepository --continue

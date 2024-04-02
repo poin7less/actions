@@ -1,0 +1,26 @@
+name: Setup
+description: Checks out the repository, installs dependencies and adds usually used properties to the default files
+runs:
+  using: composite
+  steps:
+    - uses: actions/checkout@v4
+    - shell: bash
+      run: |
+        set -e
+        sudo apt update -y
+        sudo apt install -y python3-venv python3.10-venv git unzip
+    - shell: bash
+      run: |
+        set -e
+        refName=${{ github.ref_name }}
+        refType=${{ github.ref_type }}
+        if [ $refType = "branch" ]; then
+          refName="$refName-SNAPSHOT"
+        fi
+        echo "VERSION_NAME=$refName" >> gradle.properties
+
+    - shell: bash
+      run: |
+        set -e
+        echo "GithubPassword=${{ github.token }}" >> gradle.properties
+        echo "GithubUsername=${{ github.actor }}" >> gradle.properties
