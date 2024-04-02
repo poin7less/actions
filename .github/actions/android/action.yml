@@ -7,7 +7,7 @@ runs:
     - shell: bash
       run: |
         sudo apt update -y
-        sudo apt install -y unzip
+        sudo apt install -y python3-venv python3.10-venv git unzip
     - shell: bash
       run: |
         refName=${{ github.ref_name }}
