@@ -10,7 +10,7 @@ jobs:
       packages: write
       contents: write
     steps:
-      - uses: poin7less/actions/.github/actions/android@master
+      - uses: poin7less/actions/.github/actions/android@v1
         with:
           token: ${{ github.token }}
           user: ${{ github.actor }}

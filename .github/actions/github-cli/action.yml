@@ -8,6 +8,7 @@ runs:
         set -e
         sudo apt update -y
         sudo apt install -y wget
+
     - shell: bash
       run: |
         set -e

@@ -3,7 +3,7 @@ description: Prepares JDK runtime (ie. installs java and sets everything up)
 runs:
   using: composite
   steps:
-    - uses: poin7less/actions/.github/actions/setup@master
+    - uses: poin7less/actions/.github/actions/setup@v1
 
     - uses: actions/setup-java@v4
       with:

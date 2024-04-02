@@ -20,7 +20,7 @@ jobs:
       checks: write
       pull-requests: write
     steps:
-      - uses: poin7less/actions/.github/actions/jvm@master
+      - uses: poin7less/actions/.github/actions/jvm@v1
 
       - uses: gradle/gradle-build-action@v3
         with:
@@ -37,7 +37,7 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: poin7less/actions/.github/actions/jvm@master
+      - uses: poin7less/actions/.github/actions/jvm@v1
 
       - uses: gradle/gradle-build-action@v3
         with:
@@ -51,7 +51,7 @@ jobs:
       checks: write
       pull-requests: write
     steps:
-      - uses: poin7less/actions/.github/actions/jvm@master
+      - uses: poin7less/actions/.github/actions/jvm@v1
 
       - uses: gradle/gradle-build-action@v3
         with:
@@ -64,5 +64,5 @@ jobs:
 
   merge:
     needs: [ test, compatibility, lint ]
-    uses: poin7less/actions/.github/workflows/automerge.yml@master
+    uses: poin7less/actions/.github/workflows/automerge.yml@v1
     secrets: inherit

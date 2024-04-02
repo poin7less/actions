@@ -4,11 +4,13 @@ runs:
   using: composite
   steps:
     - uses: actions/checkout@v4
+
     - shell: bash
       run: |
         set -e
         sudo apt update -y
         sudo apt install -y python3-venv python3.10-venv git unzip
+
     - shell: bash
       run: |
         set -e
